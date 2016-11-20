@@ -1,0 +1,94 @@
+############################
+##  Protocol friendly naming
+#############################
+
+filter {
+    translate {
+      field => "[netflow][protocol]"
+	destination => "[netflow][protocol]"
+	override => "true"
+	dictionary => [  
+	  "1",   "ICMP",
+    "6",   "TCP", 
+	  "17",  "UDP",
+	  "47",  "GRE", 
+	  "50",  "ESP",
+	  "51",  "AH", 
+	  "58",  "IPv6-ICMP",
+	  "115", "L2TP"
+	  ]
+     }
+}
+
+############################
+##  Traffic Identification
+############################
+filter {
+    translate {
+       field => "[netflow][l4_dst_port]"
+        destination => "[netflow][l4_dst_port]"
+        override => "true"
+        dictionary => [ 
+       "22",    "SSH", 
+       "25",    "SMTP", 
+	     "53",    "DNS", 
+	     "67",    "DHCP", 
+	     "68",    "DHCP", 
+	     "69",    "TFTP", 
+	     "80",    "HTTP", 
+	     "123",   "NTP", 
+	     "137",   "NETBIOS", 
+	     "138",   "NETBIOS", 
+	     "139",   "NETBIOS", 
+	     "143",   "IMAP", 
+	     "443",   "HTTPS", 
+	     "445",   "SMB", 
+	     "465",   "SMTPS",
+	     "554",   "RTSP",  
+	     "587",   "MAIL SUBMISSION", 
+	     "993",   "IMAPS",
+	     "1194",  "OPENVPN", 
+       "1900",  "Multicast",
+	     "32400", "PLEX"
+           ]
+# make it an string
+#  mutate {
+#    convert => [ "[netflow][protocol]", "string" ]
+#   }
+  }
+}
+
+filter {
+    translate {
+       field => "[netflow][l4_src_port]"
+        destination => "[netflow][l4_src_port]"
+        override => "true"
+        dictionary => [
+           "22",    "SSH",
+           "25",    "SMTP",
+           "53",    "DNS",
+           "67",    "DHCP",
+           "68",    "DHCP",
+           "69",    "TFTP",
+           "80",    "HTTP",
+           "123",   "NTP",
+           "137",   "NETBIOS",
+           "138",   "NETBIOS",
+           "139",   "NETBIOS",
+           "143",   "IMAP",
+           "443",   "HTTPS",
+           "445",   "SMB",
+           "465",   "SMTPS",
+           "554",   "RTSP",
+           "587",   "MAIL SUBMISSION",
+           "993",   "IMAPS",
+	       "1194",  "OPENVPN",
+           "1900",  "Multicast",
+           "32400", "PLEX"
+           ]
+# make it an string
+#  mutate {
+#    convert => [ "[netflow][protocol]", "string" ]
+#   }
+  }
+}
