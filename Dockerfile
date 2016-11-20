@@ -121,10 +121,13 @@ ADD ./logstash-beats.key /etc/pki/tls/private/logstash-beats.key
 ADD ./02-beats-input.conf /etc/logstash/conf.d/02-beats-input.conf
 ADD ./10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
 ADD ./11-nginx.conf /etc/logstash/conf.d/11-nginx.conf
+ADD ./15-pfsense.conf /etc/logstash/conf.d/15.pfsense.conf
+ADD ./20-Traffic-Identification.conf /etc/logstash/conf.d/20-Traffic-Identification.conf.conf
 ADD ./30-output.conf /etc/logstash/conf.d/30-output.conf
 
 # patterns
 ADD ./nginx.pattern ${LOGSTASH_HOME}/patterns/nginx
+ADD ./pfsense.pattern ${LOGSTASH_HOME}/patterns/pfsense
 RUN chown -R logstash:logstash ${LOGSTASH_HOME}/patterns
 
 
